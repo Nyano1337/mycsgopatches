@@ -1,0 +1,65 @@
+"Games"
+{
+	"csgo"
+	{
+		"Keys"
+		{
+			"jnz1_patch"
+			{
+				"windows"	"5B"
+				"linux"		"00" // no where to jump, lol
+			}
+			"jnz2_patch"
+			{
+				"windows"	"55"
+			}
+		}
+		"Addresses"
+		{
+			"jnz_base_1"
+			{
+				"windows"
+				{
+					"signature" "CSteam3Server::OnValidateAuthTicketResponse_patch1"
+					"offset" "1" // skip the first byte(opcode)
+				}
+				"linux"
+				{
+					"signature" "CSteam3Server::OnValidateAuthTicketResponse_patch1"
+					"offset" "2" // skip the first 2 byte(opcode)
+				}
+			}
+			"jnz_base_2"
+			{
+				"windows"
+				{
+					"signature" "CSteam3Server::OnValidateAuthTicketResponse_patch2"
+					"offset" "1" // skip the first byte(opcode)
+				}
+			}
+		}
+		"Signatures"
+		{
+			// search "#Valve_Reject_Banned_From_Server"
+			"CSteam3Server::OnValidateAuthTicketResponse_patch1"
+			{
+				"library"	"engine"
+				"windows"	"\x75\x42\x83\x7B\x08\x02"
+				"linux"		"\x0F\x85\x2A\x2A\x2A\x2A\x8B\x16\x8D\x45\xD8"
+			}
+			"CSteam3Server::OnValidateAuthTicketResponse_patch2"
+			{
+				"library"	"engine"
+				"windows"	"\x75\x3C\x8B\xCB\xE8"
+			}
+		}
+		"Offsets"
+		{
+			"OS"
+			{
+				"windows"   "1"
+				"linux"     "2"
+			}
+		}
+	}
+}
